@@ -65,9 +65,8 @@ export default {
         flexitype: {
           blue: "#2576D9",
           black: "#0C0C0B",
-          light: "#F1F0F1",
-          purple: "#16214E",
-          cyan: "#FF6B6B",
+          white: "#FFFFFF",
+          gray: "#FF10F1",
         },
       },
       borderRadius: {

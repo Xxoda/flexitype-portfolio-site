@@ -7,12 +7,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import Icon from "@/components/ui/icon";
 
 interface Project {
   id: number;
   title: string;
   image: string;
+  images: string[];
   description: string;
   category: string;
 }
@@ -20,12 +24,28 @@ interface Project {
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [animatedLetters, setAnimatedLetters] = useState<boolean[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   // Создаем данные для 24 проектов
+  const projectImages = [
+    "/img/26e75aa9-98fa-4c8c-a563-d6a2995a68a8.jpg",
+    "/img/baf710f5-3716-425b-886c-31afe4d42582.jpg",
+    "/img/ec0eed32-50b0-40bc-a07a-816058d5972d.jpg",
+    "/img/1c151082-a3dc-4a76-97c5-3eca3f4c6bf2.jpg",
+    "/img/ac9dd3ae-eb49-4885-aab0-955b60a9db86.jpg",
+    "/img/d9d8567a-164c-4275-b176-f3d0dcab3ff4.jpg",
+  ];
+
   const projects: Project[] = Array.from({ length: 24 }, (_, i) => ({
     id: i + 1,
     title: `Проект ${i + 1}`,
-    image: "/img/26e75aa9-98fa-4c8c-a563-d6a2995a68a8.jpg",
+    image: projectImages[i % projectImages.length],
+    images: projectImages,
     description: `Описание проекта ${i + 1}. Креативное решение в области дизайна, которое воплощает современные тенденции и инновационный подход.`,
     category: ["Логотип", "Брендинг", "Интерфейс", "Упаковка"][i % 4],
   }));
@@ -52,6 +72,34 @@ const Index = () => {
     return () => intervals.forEach(clearInterval);
   }, []);
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    alert("Сообщение отправлено!");
+    setFormData({ name: "", email: "", message: "" });
+  };
+
+  const nextImage = () => {
+    if (selectedProject) {
+      setCurrentImageIndex((prev) =>
+        prev === selectedProject.images.length - 1 ? 0 : prev + 1,
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedProject) {
+      setCurrentImageIndex((prev) =>
+        prev === 0 ? selectedProject.images.length - 1 : prev - 1,
+      );
+    }
+  };
+
+  const openProject = (project: Project) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(0);
+  };
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -60,7 +108,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-flexitype-black text-flexitype-light">
+    <div className="min-h-screen bg-flexitype-black text-flexitype-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-flexitype-black/90 backdrop-blur-sm z-50 border-b border-flexitype-blue/20">
         <div className="container mx-auto px-6 py-4">
@@ -71,31 +119,31 @@ const Index = () => {
             <div className="hidden md:flex space-x-8">
               <button
                 onClick={() => scrollToSection("hero")}
-                className="text-flexitype-light hover:text-flexitype-blue transition-colors"
+                className="text-flexitype-white hover:text-flexitype-blue transition-colors"
               >
                 Главная
               </button>
               <button
                 onClick={() => scrollToSection("about")}
-                className="text-flexitype-light hover:text-flexitype-blue transition-colors"
+                className="text-flexitype-white hover:text-flexitype-blue transition-colors"
               >
                 О нас
               </button>
               <button
                 onClick={() => scrollToSection("projects")}
-                className="text-flexitype-light hover:text-flexitype-blue transition-colors"
+                className="text-flexitype-white hover:text-flexitype-blue transition-colors"
               >
                 Проекты
               </button>
               <button
                 onClick={() => scrollToSection("contacts")}
-                className="text-flexitype-light hover:text-flexitype-blue transition-colors"
+                className="text-flexitype-white hover:text-flexitype-blue transition-colors"
               >
                 Контакты
               </button>
             </div>
             <div className="md:hidden">
-              <Icon name="Menu" size={24} className="text-flexitype-light" />
+              <Icon name="Menu" size={24} className="text-flexitype-white" />
             </div>
           </div>
         </div>
@@ -108,7 +156,7 @@ const Index = () => {
       >
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-flexitype-blue/20 to-flexitype-cyan/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-flexitype-blue/20 to-flexitype-blue/10"></div>
           <div
             className="absolute inset-0"
             style={{
@@ -127,7 +175,7 @@ const Index = () => {
                 className={`inline-block transition-all duration-500 ${
                   animatedLetters[index]
                     ? "text-flexitype-blue transform -translate-y-2 animate-glow"
-                    : "text-flexitype-light"
+                    : "text-flexitype-white"
                 }`}
               >
                 {letter}
@@ -135,7 +183,7 @@ const Index = () => {
             ))}
           </h1>
 
-          <p className="text-xl md:text-2xl text-flexitype-light/80 mb-12 animate-fade-up font-inter">
+          <p className="text-xl md:text-2xl text-flexitype-white/80 mb-12 animate-fade-up font-inter">
             дизайн, который двигает
           </p>
 
@@ -150,7 +198,7 @@ const Index = () => {
         {/* Floating elements */}
         <div className="absolute top-20 left-20 w-4 h-4 bg-flexitype-blue rounded-full animate-float opacity-60"></div>
         <div
-          className="absolute bottom-32 right-32 w-6 h-6 bg-flexitype-cyan rounded-full animate-float opacity-40"
+          className="absolute bottom-32 right-32 w-6 h-6 bg-flexitype-blue rounded-full animate-float opacity-40"
           style={{ animationDelay: "1s" }}
         ></div>
         <div
@@ -167,7 +215,7 @@ const Index = () => {
               <h2 className="font-satoshi font-bold text-4xl md:text-5xl text-flexitype-blue mb-8">
                 О нас
               </h2>
-              <div className="space-y-4 text-lg text-flexitype-light/90 font-inter leading-relaxed">
+              <div className="space-y-4 text-lg text-flexitype-white/90 font-inter leading-relaxed">
                 <p>Мы — Flexitype. Студия, которая превращает идеи в стиль.</p>
                 <p>
                   Логотипы, брендинг, интерфейсы, упаковка — всё, что говорит за
@@ -199,8 +247,8 @@ const Index = () => {
             {projects.map((project) => (
               <Card
                 key={project.id}
-                className="bg-flexitype-purple/20 border-flexitype-blue/20 hover:border-flexitype-blue/50 transition-all duration-300 hover:scale-105 cursor-pointer group"
-                onClick={() => setSelectedProject(project)}
+                className="bg-flexitype-black/50 border-flexitype-blue/20 hover:border-flexitype-blue/50 transition-all duration-300 hover:scale-105 cursor-pointer group"
+                onClick={() => openProject(project)}
               >
                 <CardContent className="p-0">
                   <div className="aspect-square overflow-hidden rounded-t-lg">
@@ -211,7 +259,7 @@ const Index = () => {
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="font-satoshi font-semibold text-xl text-flexitype-light mb-2">
+                    <h3 className="font-satoshi font-semibold text-xl text-flexitype-white mb-2">
                       {project.title}
                     </h3>
                     <p className="text-flexitype-blue font-inter text-sm">
@@ -227,59 +275,126 @@ const Index = () => {
 
       {/* Contacts Section */}
       <section id="contacts" className="py-20 px-6">
-        <div className="container mx-auto text-center">
-          <h2 className="font-satoshi font-bold text-4xl md:text-5xl text-flexitype-blue mb-12">
+        <div className="container mx-auto">
+          <h2 className="font-satoshi font-bold text-4xl md:text-5xl text-center text-flexitype-blue mb-12">
             Контакты
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
-            <a
-              href="https://t.me/flexitype"
-              className="flex flex-col items-center space-y-3 text-flexitype-light hover:text-flexitype-blue transition-colors group"
-            >
-              <Icon
-                name="MessageCircle"
-                size={32}
-                className="group-hover:scale-110 transition-transform"
-              />
-              <span className="font-inter">Telegram</span>
-            </a>
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            {/* Contact Form */}
+            <div className="space-y-6">
+              <h3 className="font-satoshi font-semibold text-2xl text-flexitype-white mb-6">
+                Напишите нам
+              </h3>
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="name" className="text-flexitype-white">
+                    Имя
+                  </Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="bg-flexitype-black/50 border-flexitype-blue/30 text-flexitype-white"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="email" className="text-flexitype-white">
+                    Email
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="bg-flexitype-black/50 border-flexitype-blue/30 text-flexitype-white"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="message" className="text-flexitype-white">
+                    Сообщение
+                  </Label>
+                  <Textarea
+                    id="message"
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
+                    className="bg-flexitype-black/50 border-flexitype-blue/30 text-flexitype-white min-h-32"
+                    required
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-flexitype-blue hover:bg-flexitype-blue/80 text-white"
+                >
+                  Отправить сообщение
+                </Button>
+              </form>
+            </div>
 
-            <a
-              href="https://vk.com/flexitype"
-              className="flex flex-col items-center space-y-3 text-flexitype-light hover:text-flexitype-blue transition-colors group"
-            >
-              <Icon
-                name="Users"
-                size={32}
-                className="group-hover:scale-110 transition-transform"
-              />
-              <span className="font-inter">VKontakte</span>
-            </a>
+            {/* Social Links */}
+            <div className="space-y-6">
+              <h3 className="font-satoshi font-semibold text-2xl text-flexitype-white mb-6">
+                Соцсети
+              </h3>
+              <div className="space-y-4">
+                <a
+                  href="https://t.me/flexitype"
+                  className="flex items-center space-x-4 text-flexitype-white hover:text-flexitype-blue transition-colors group p-4 rounded-lg border border-flexitype-blue/20 hover:border-flexitype-blue/50"
+                >
+                  <Icon
+                    name="MessageCircle"
+                    size={24}
+                    className="group-hover:scale-110 transition-transform"
+                  />
+                  <span className="font-inter">Telegram</span>
+                </a>
 
-            <a
-              href="https://wa.me/your-number"
-              className="flex flex-col items-center space-y-3 text-flexitype-light hover:text-flexitype-blue transition-colors group"
-            >
-              <Icon
-                name="Phone"
-                size={32}
-                className="group-hover:scale-110 transition-transform"
-              />
-              <span className="font-inter">WhatsApp</span>
-            </a>
+                <a
+                  href="https://vk.com/flexitype"
+                  className="flex items-center space-x-4 text-flexitype-white hover:text-flexitype-blue transition-colors group p-4 rounded-lg border border-flexitype-blue/20 hover:border-flexitype-blue/50"
+                >
+                  <Icon
+                    name="Users"
+                    size={24}
+                    className="group-hover:scale-110 transition-transform"
+                  />
+                  <span className="font-inter">VKontakte</span>
+                </a>
 
-            <a
-              href="mailto:info@flexitype.com"
-              className="flex flex-col items-center space-y-3 text-flexitype-light hover:text-flexitype-blue transition-colors group"
-            >
-              <Icon
-                name="Mail"
-                size={32}
-                className="group-hover:scale-110 transition-transform"
-              />
-              <span className="font-inter">E-mail</span>
-            </a>
+                <a
+                  href="https://wa.me/your-number"
+                  className="flex items-center space-x-4 text-flexitype-white hover:text-flexitype-blue transition-colors group p-4 rounded-lg border border-flexitype-blue/20 hover:border-flexitype-blue/50"
+                >
+                  <Icon
+                    name="Phone"
+                    size={24}
+                    className="group-hover:scale-110 transition-transform"
+                  />
+                  <span className="font-inter">WhatsApp</span>
+                </a>
+
+                <a
+                  href="mailto:info@flexitype.com"
+                  className="flex items-center space-x-4 text-flexitype-white hover:text-flexitype-blue transition-colors group p-4 rounded-lg border border-flexitype-blue/20 hover:border-flexitype-blue/50"
+                >
+                  <Icon
+                    name="Mail"
+                    size={24}
+                    className="group-hover:scale-110 transition-transform"
+                  />
+                  <span className="font-inter">E-mail</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -292,7 +407,7 @@ const Index = () => {
               FLEXITYPE
             </div>
           </div>
-          <p className="text-flexitype-light/60 font-inter">
+          <p className="text-flexitype-white/60 font-inter">
             © Flexitype, 2025
           </p>
         </div>
@@ -303,29 +418,88 @@ const Index = () => {
         open={!!selectedProject}
         onOpenChange={() => setSelectedProject(null)}
       >
-        <DialogContent className="bg-flexitype-black border-flexitype-blue/30 text-flexitype-light max-w-2xl">
+        <DialogContent className="bg-flexitype-black border-flexitype-blue/30 text-flexitype-white max-w-5xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="font-satoshi text-2xl text-flexitype-blue">
               {selectedProject?.title}
             </DialogTitle>
           </DialogHeader>
-          <div className="space-y-4">
-            <img
-              src={selectedProject?.image}
-              alt={selectedProject?.title}
-              className="w-full rounded-lg"
-            />
-            <p className="text-flexitype-light/90 font-inter leading-relaxed">
-              {selectedProject?.description}
-            </p>
-            <div className="flex justify-between items-center">
-              <span className="text-flexitype-blue font-inter font-medium">
-                {selectedProject?.category}
-              </span>
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Main Image */}
+            <div className="space-y-4">
+              <div className="relative">
+                <img
+                  src={selectedProject?.images[currentImageIndex]}
+                  alt={selectedProject?.title}
+                  className="w-full rounded-lg aspect-square object-cover"
+                />
+                <button
+                  onClick={prevImage}
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-flexitype-black/70 text-flexitype-blue p-2 rounded-full hover:bg-flexitype-blue/20 transition-colors"
+                >
+                  <Icon name="ChevronLeft" size={20} />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-flexitype-black/70 text-flexitype-blue p-2 rounded-full hover:bg-flexitype-blue/20 transition-colors"
+                >
+                  <Icon name="ChevronRight" size={20} />
+                </button>
+              </div>
+
+              {/* Image Thumbnails */}
+              <div className="flex space-x-2 overflow-x-auto">
+                {selectedProject?.images.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden ${
+                      currentImageIndex === index
+                        ? "border-flexitype-blue"
+                        : "border-flexitype-blue/30"
+                    }`}
+                  >
+                    <img
+                      src={img}
+                      alt={`${selectedProject?.title} ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Project Info */}
+            <div className="space-y-6">
+              <div>
+                <span className="text-flexitype-blue font-inter font-medium text-sm">
+                  {selectedProject?.category}
+                </span>
+                <h3 className="font-satoshi text-xl text-flexitype-white mt-2">
+                  {selectedProject?.title}
+                </h3>
+              </div>
+
+              <p className="text-flexitype-white/90 font-inter leading-relaxed">
+                {selectedProject?.description}
+              </p>
+
+              <div className="space-y-4">
+                <h4 className="font-satoshi font-semibold text-flexitype-blue">
+                  Детали проекта:
+                </h4>
+                <ul className="space-y-2 text-flexitype-white/80 font-inter">
+                  <li>• Современный подход к дизайну</li>
+                  <li>• Адаптивная верстка</li>
+                  <li>• Пользовательский интерфейс</li>
+                  <li>• Брендинг и айдентика</li>
+                </ul>
+              </div>
+
               <Button
                 onClick={() => setSelectedProject(null)}
                 variant="outline"
-                className="border-flexitype-blue/30 text-flexitype-blue hover:bg-flexitype-blue/10"
+                className="w-full border-flexitype-blue/30 text-flexitype-blue hover:bg-flexitype-blue/10"
               >
                 Закрыть
               </Button>
