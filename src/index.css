@@ -101,9 +101,8 @@
   body {
     @apply bg-background text-foreground font-inter;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
-}
 }
