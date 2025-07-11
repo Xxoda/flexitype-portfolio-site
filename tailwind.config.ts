@@ -66,7 +66,8 @@ export default {
           blue: "#2576D9",
           black: "#0C0C0B",
           white: "#FFFFFF",
-          gray: "#FF10F1",
+          gray: "#F8F9FA",
+          light: "#F1F0F1",
         },
       },
       borderRadius: {
