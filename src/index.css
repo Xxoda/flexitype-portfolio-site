@@ -100,6 +100,9 @@
 
   body {
     @apply bg-background text-foreground font-inter;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    min-height: 100vh;
+    position: relative;
   }
 
   html {

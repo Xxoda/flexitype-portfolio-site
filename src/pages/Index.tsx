@@ -11,6 +11,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import ContactsSection from "@/components/ContactsSection";
 import Footer from "@/components/Footer";
 import ProjectModal from "@/components/ProjectModal";
+import FloatingElements from "@/components/FloatingElements";
 
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -60,7 +61,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-flexitype-white text-flexitype-black">
+    <div className="min-h-screen bg-flexitype-white text-flexitype-black relative">
+      <FloatingElements />
       <Navigation scrollToSection={scrollToSection} />
 
       <HeroSection scrollToSection={scrollToSection} />

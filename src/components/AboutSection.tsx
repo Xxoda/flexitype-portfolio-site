@@ -22,7 +22,7 @@ const AboutSection = () => {
 
           <div className="flex justify-center">
             <img
-              src="/img/9c7791a1-793b-4d49-8479-dc747bc33273.jpg"
+              src="/img/eafb8d6c-79e3-4d11-bd54-296201c12e9c.jpg"
               alt="Flexitype Studio"
               className="w-full max-w-md rounded-lg shadow-2xl hover:scale-105 transition-transform duration-300"
             />

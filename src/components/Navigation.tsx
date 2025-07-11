@@ -18,7 +18,10 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
     <nav className="fixed top-0 w-full bg-flexitype-white/95 backdrop-blur-sm z-50 border-b border-flexitype-blue/20 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-3">
+          <button
+            onClick={() => scrollToSection("hero")}
+            className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
+          >
             <img
               src={LOGO_URL}
               alt="Flexitype"
@@ -27,7 +30,7 @@ const Navigation = ({ scrollToSection }: NavigationProps) => {
             <span className="font-satoshi font-bold text-xl text-flexitype-black">
               Flexitype
             </span>
-          </div>
+          </button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
