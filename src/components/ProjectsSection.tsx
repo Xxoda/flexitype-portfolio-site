@@ -20,28 +20,31 @@ const ProjectsSection = ({
           Наши проекты
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
           {projects.map((project) => (
             <Card
               key={project.id}
-              className="bg-flexitype-white border-flexitype-blue/20 hover:border-flexitype-blue/50 transition-all duration-300 hover:scale-105 cursor-pointer group shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-br from-slate-900 to-slate-800 border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:scale-105 cursor-pointer group shadow-lg hover:shadow-cyan-400/20 hover:shadow-xl relative overflow-hidden"
               onClick={() => onProjectClick(project)}
             >
-              <CardContent className="p-0">
-                <div className="aspect-square overflow-hidden rounded-t-lg">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <CardContent className="p-3 sm:p-4 relative z-10">
+                <div className="aspect-square overflow-hidden rounded-lg mb-3 bg-gradient-to-br from-slate-800 to-slate-700">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                 </div>
-                <div className="p-4 sm:p-6">
-                  <h3 className="font-satoshi font-semibold text-lg sm:text-xl text-flexitype-black mb-2">
+                <div className="space-y-1">
+                  <h3 className="font-satoshi font-bold text-cyan-400 text-sm sm:text-base leading-tight">
                     {project.title}
                   </h3>
-                  <p className="text-flexitype-blue font-inter text-sm">
-                    {project.category}
-                  </p>
+                  {project.subtitle && (
+                    <p className="text-slate-400 font-inter text-xs leading-tight">
+                      {project.subtitle}
+                    </p>
+                  )}
                 </div>
               </CardContent>
             </Card>
