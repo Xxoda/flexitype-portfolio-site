@@ -1,55 +1,5 @@
-
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-
-const queryClient = new QueryClient();
-
-const AdminPanel = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    if (password === "flexitype2025") {
-      setIsAuthenticated(true);
-    } else {
-      alert("Неверный пароль");
-    }
-  };
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
-          <h2 className="text-xl font-bold mb-4 text-center">Вход в админ-панель</h2>
-          <div className="space-y-4">
-            <input
-              type="password"
-              placeholder="Пароль админа"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border rounded-lg"
-              onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
-            />
-            <button 
-              onClick={handleLogin}
-              className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700"
-            >
-              Войти
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return <AdminInterface />;
-};
+import { useState } from "react";
+import { PROJECT_DATA } from "@/hooks/useProjects";
 
 const AdminInterface = () => {
   const [activeTab, setActiveTab] = useState('about');
@@ -73,6 +23,18 @@ const AdminInterface = () => {
     ]
   });
 
+  const [projects, setProjects] = useState(() => {
+    const saved = localStorage.getItem('admin-projects');
+    return saved ? JSON.parse(saved) : PROJECT_DATA.map(p => ({
+      ...p,
+      images: [p.image],
+      subtitle: ""
+    }));
+  });
+
+  const [editingProject, setEditingProject] = useState(null);
+  const [newLink, setNewLink] = useState({ name: '', url: '', icon: 'Link' });
+
   const saveToStorage = (key, data) => {
     localStorage.setItem(key, JSON.stringify(data));
   };
@@ -86,50 +48,6 @@ const AdminInterface = () => {
     saveToStorage('admin-contacts', contactsData);
     alert('Контакты сохранены!');
   };
-
-  const removeLink = (index) => {
-    setContactsData({
-      ...contactsData,
-      links: contactsData.links.filter((_, i) => i !== index)
-    });
-  };
-
-  const [projects, setProjects] = useState(() => {
-    const saved = localStorage.getItem('admin-projects');
-    if (saved) {
-      return JSON.parse(saved);
-    }
-    
-    return [
-      {
-        id: 1,
-        title: "Инфографика для маркетплейсов",
-        image: "https://ltdfoto.ru/images/2025/07/13/image-412.png",
-        description: "Создание привлекательной инфографики для товаров на маркетплейсах",
-        category: "Графический дизайн",
-        images: ["https://ltdfoto.ru/images/2025/07/13/image-412.png"]
-      },
-      {
-        id: 2,
-        title: "Билборды / Витрины / Стенды",
-        image: "https://ltdfoto.ru/images/2025/07/13/image-413.png",
-        description: "Дизайн наружной рекламы: билборды, витрины и рекламные стенды",
-        category: "Наружная реклама",
-        images: ["https://ltdfoto.ru/images/2025/07/13/image-413.png"]
-      },
-      {
-        id: 3,
-        title: "HTML-письма",
-        image: "https://ltdfoto.ru/images/2025/07/13/image-414.png",
-        description: "Создание адаптивных HTML-шаблонов для email-рассылок",
-        category: "Email-маркетинг",
-        images: ["https://ltdfoto.ru/images/2025/07/13/image-414.png"]
-      }
-    ];
-  });
-
-  const [editingProject, setEditingProject] = useState(null);
-  const [newLink, setNewLink] = useState({ name: '', url: '', icon: 'Link' });
 
   const saveProjects = (updatedProjects) => {
     setProjects(updatedProjects);
@@ -176,6 +94,13 @@ const AdminInterface = () => {
       });
       setNewLink({ name: '', url: '', icon: 'Link' });
     }
+  };
+
+  const removeLink = (index) => {
+    setContactsData({
+      ...contactsData,
+      links: contactsData.links.filter((_, i) => i !== index)
+    });
   };
 
   const tabs = [
@@ -501,70 +426,4 @@ const AdminInterface = () => {
   );
 };
 
-const SecretAccess = ({ children }: { children: React.ReactNode }) => {
-  const [showAdmin, setShowAdmin] = useState(false);
-  const [keySequence, setKeySequence] = useState<string[]>([]);
-  const secretSequence = ['a', 'd', 'm', 'i', 'n'];
-
-  useEffect(() => {
-    const handleKeyPress = (event: KeyboardEvent) => {
-      const newSequence = [...keySequence, event.key.toLowerCase()].slice(-5);
-      setKeySequence(newSequence);
-      
-      if (newSequence.join('') === secretSequence.join('')) {
-        setShowAdmin(true);
-        setKeySequence([]);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [keySequence]);
-
-  if (showAdmin) {
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-        <div className="bg-white p-6 rounded-lg w-full max-w-md">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Скрытый доступ</h2>
-            <button 
-              onClick={() => setShowAdmin(false)}
-              className="text-gray-500 hover:text-gray-700 text-xl"
-            >
-              ✕
-            </button>
-          </div>
-          <button 
-            onClick={() => window.location.href = '/admin'}
-            className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700"
-          >
-            Открыть админ панель
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  return <>{children}</>;
-};
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <SecretAccess>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/admin" element={<AdminPanel />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </SecretAccess>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
-
-export default App;
+export default AdminInterface;
