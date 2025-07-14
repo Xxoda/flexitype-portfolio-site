@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useAdminData } from '@/hooks/useAdminData';
 
 interface AboutData {
   title: string;
@@ -14,8 +14,23 @@ interface AdminAboutProps {
 }
 
 const AdminAbout = ({ aboutData, setAboutData }: AdminAboutProps) => {
+  const { saveData } = useAdminData('admin-about', aboutData, 'Данные о компании сохранены!');
+  
   const saveAbout = () => {
     localStorage.setItem('admin-about', JSON.stringify(aboutData));
+    
+    // Принудительно вызываем событие для синхронизации
+    window.dispatchEvent(new CustomEvent('admin-data-changed', {
+      detail: { key: 'admin-about', data: aboutData, timestamp: Date.now() }
+    }));
+    
+    // Эмулируем событие storage
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'admin-about',
+      newValue: JSON.stringify(aboutData),
+      oldValue: localStorage.getItem('admin-about')
+    }));
+    
     alert('Данные о компании сохранены!');
   };
 

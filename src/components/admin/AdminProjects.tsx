@@ -28,6 +28,18 @@ const AdminProjects = ({ projects, setProjects }: AdminProjectsProps) => {
   const saveProjects = (updatedProjects: Project[]) => {
     setProjects(updatedProjects);
     localStorage.setItem('admin-projects', JSON.stringify(updatedProjects));
+    
+    // Принудительно вызываем события для синхронизации
+    window.dispatchEvent(new CustomEvent('admin-data-changed', {
+      detail: { key: 'admin-projects', data: updatedProjects, timestamp: Date.now() }
+    }));
+    
+    // Эмулируем событие storage
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'admin-projects',
+      newValue: JSON.stringify(updatedProjects),
+      oldValue: localStorage.getItem('admin-projects')
+    }));
   };
 
   const deleteProject = (id: number) => {

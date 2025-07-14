@@ -24,6 +24,19 @@ const AdminContacts = ({ contactsData, setContactsData }: AdminContactsProps) =>
 
   const saveContacts = () => {
     localStorage.setItem('admin-contacts', JSON.stringify(contactsData));
+    
+    // Принудительно вызываем событие для синхронизации
+    window.dispatchEvent(new CustomEvent('admin-data-changed', {
+      detail: { key: 'admin-contacts', data: contactsData, timestamp: Date.now() }
+    }));
+    
+    // Эмулируем событие storage
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'admin-contacts',
+      newValue: JSON.stringify(contactsData),
+      oldValue: localStorage.getItem('admin-contacts')
+    }));
+    
     alert('Контакты сохранены!');
   };
 

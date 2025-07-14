@@ -55,14 +55,32 @@ const ContactsSection = ({
       }
     };
 
+    // Слушатель кастомных событий для мгновенной синхронизации
+    const handleCustomEvent = (e: CustomEvent) => {
+      if (e.detail.key === 'admin-contacts') {
+        setContactsData(e.detail.data);
+      }
+    };
+
     window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('admin-data-changed', handleCustomEvent as EventListener);
     
+    // Более частая проверка для лучшей синхронизации
     const checkForUpdates = setInterval(() => {
       handleStorageChange();
-    }, 100);
+    }, 50);
+
+    // Проверка при фокусе на окно
+    const handleFocus = () => {
+      handleStorageChange();
+    };
+    
+    window.addEventListener('focus', handleFocus);
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('admin-data-changed', handleCustomEvent as EventListener);
+      window.removeEventListener('focus', handleFocus);
       clearInterval(checkForUpdates);
     };
   }, []);
