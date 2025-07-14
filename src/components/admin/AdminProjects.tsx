@@ -65,7 +65,7 @@ const AdminProjects = ({ projects, setProjects }: AdminProjectsProps) => {
   const createProject = () => {
     if (newProject.title && newProject.image && newProject.description && newProject.category) {
       const nextId = Math.max(...projects.map(p => p.id), 0) + 1;
-      const projectToAdd = {
+      const projectToAdd: Project = {
         ...newProject,
         id: nextId,
         images: newProject.image ? [newProject.image] : []
@@ -199,9 +199,9 @@ const AdminProjects = ({ projects, setProjects }: AdminProjectsProps) => {
                       placeholder="Ссылка на новое изображение"
                       className="w-full p-2 border rounded text-xs mt-2"
                       onKeyPress={(e) => {
-                        if (e.key === 'Enter' && e.target.value) {
-                          addImageToProject(project.id, e.target.value);
-                          e.target.value = '';
+                        if (e.key === 'Enter' && (e.target as HTMLInputElement).value) {
+                          addImageToProject(project.id, (e.target as HTMLInputElement).value);
+                          (e.target as HTMLInputElement).value = '';
                         }
                       }}
                     />
