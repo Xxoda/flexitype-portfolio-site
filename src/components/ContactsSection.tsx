@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import Icon from "@/components/ui/icon";
 import { FormData } from "@/types";
-import { SOCIAL_LINKS } from "@/constants";
+import { useState, useEffect } from "react";
 
 interface ContactsSectionProps {
   formData: FormData;
@@ -17,6 +17,56 @@ const ContactsSection = ({
   onFormDataChange,
   onFormSubmit,
 }: ContactsSectionProps) => {
+  const [contactsData, setContactsData] = useState({
+    title: 'Контакты',
+    formTitle: 'Напишите нам',
+    socialTitle: 'Соцсети',
+    email: 'info@flexitype.com',
+    links: [
+      { name: 'Telegram', url: 'https://t.me/flexitype', icon: 'MessageCircle' },
+      { name: 'VKontakte', url: 'https://vk.com/flexitype', icon: 'Users' },
+      { name: 'WhatsApp', url: 'https://wa.me/your-number', icon: 'Phone' },
+      { name: 'E-mail', url: 'mailto:info@flexitype.com', icon: 'Mail' }
+    ]
+  });
+
+  useEffect(() => {
+    const savedData = localStorage.getItem('admin-contacts');
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        setContactsData(parsedData);
+      } catch (error) {
+        console.error('Error parsing saved contacts data:', error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const savedData = localStorage.getItem('admin-contacts');
+      if (savedData) {
+        try {
+          const parsedData = JSON.parse(savedData);
+          setContactsData(parsedData);
+        } catch (error) {
+          console.error('Error parsing saved contacts data:', error);
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    const checkForUpdates = setInterval(() => {
+      handleStorageChange();
+    }, 100);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(checkForUpdates);
+    };
+  }, []);
+
   return (
     <section
       id="contacts"
@@ -24,14 +74,14 @@ const ContactsSection = ({
     >
       <div className="container mx-auto">
         <h2 className="font-satoshi font-bold text-3xl sm:text-4xl md:text-5xl text-center text-flexitype-blue mb-8 sm:mb-12">
-          Контакты
+          {contactsData.title}
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
           {/* Contact Form */}
           <div className="space-y-6">
             <h3 className="font-satoshi font-semibold text-xl sm:text-2xl text-flexitype-black mb-6">
-              Напишите нам
+              {contactsData.formTitle}
             </h3>
             <form onSubmit={onFormSubmit} className="space-y-4">
               <div>
@@ -90,10 +140,10 @@ const ContactsSection = ({
           {/* Social Links */}
           <div className="space-y-6">
             <h3 className="font-satoshi font-semibold text-xl sm:text-2xl text-flexitype-black mb-6">
-              Соцсети
+              {contactsData.socialTitle}
             </h3>
             <div className="space-y-4">
-              {SOCIAL_LINKS.map((link) => (
+              {contactsData.links.map((link) => (
                 <a
                   key={link.name}
                   href={link.url}
