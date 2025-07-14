@@ -65,6 +65,7 @@ const AdminInterface = () => {
     title: 'Контакты',
     formTitle: 'Напишите нам',
     socialTitle: 'Соцсети',
+    email: 'info@flexitype.com',
     links: [
       { name: 'Telegram', url: 'https://t.me/flexitype', icon: 'MessageCircle' },
       { name: 'VKontakte', url: 'https://vk.com/flexitype', icon: 'Users' },
@@ -101,35 +102,39 @@ const AdminInterface = () => {
     }
     
     return [
-      {
-        id: 1,
-        title: "Инфографика для маркетплейсов",
-        image: "https://ltdfoto.ru/images/2025/07/13/image-412.png",
-        description: "Создание привлекательной инфографики для товаров на маркетплейсах",
-        category: "Графический дизайн",
-        images: ["https://ltdfoto.ru/images/2025/07/13/image-412.png"]
-      },
-      {
-        id: 2,
-        title: "Билборды / Витрины / Стенды",
-        image: "https://ltdfoto.ru/images/2025/07/13/image-413.png",
-        description: "Дизайн наружной рекламы: билборды, витрины и рекламные стенды",
-        category: "Наружная реклама",
-        images: ["https://ltdfoto.ru/images/2025/07/13/image-413.png"]
-      },
-      {
-        id: 3,
-        title: "HTML-письма",
-        image: "https://ltdfoto.ru/images/2025/07/13/image-414.png",
-        description: "Создание адаптивных HTML-шаблонов для email-рассылок",
-        category: "Email-маркетинг",
-        images: ["https://ltdfoto.ru/images/2025/07/13/image-414.png"]
-      }
+      { id: 1, title: "Инфографика для маркетплейсов", image: "https://ltdfoto.ru/images/2025/07/13/image-412.png", description: "Создание привлекательной инфографики для товаров на маркетплейсах", category: "Графический дизайн", images: ["https://ltdfoto.ru/images/2025/07/13/image-412.png"] },
+      { id: 2, title: "Билборды / Витрины / Стенды", image: "https://ltdfoto.ru/images/2025/07/13/image-413.png", description: "Дизайн наружной рекламы: билборды, витрины и рекламные стенды", category: "Наружная реклама", images: ["https://ltdfoto.ru/images/2025/07/13/image-413.png"] },
+      { id: 3, title: "HTML-письма", image: "https://ltdfoto.ru/images/2025/07/13/image-414.png", description: "Создание адаптивных HTML-шаблонов для email-рассылок", category: "Email-маркетинг", images: ["https://ltdfoto.ru/images/2025/07/13/image-414.png"] },
+      { id: 4, title: "Фирменный стиль", image: "/img/project-4.jpg", description: "Разработка логотипа и корпоративного стиля для компаний", category: "Брендинг", images: ["/img/project-4.jpg"] },
+      { id: 5, title: "Веб-дизайн", image: "/img/project-5.jpg", description: "Создание современных адаптивных веб-сайтов", category: "Веб-дизайн", images: ["/img/project-5.jpg"] },
+      { id: 6, title: "Упаковка товаров", image: "/img/project-6.jpg", description: "Дизайн упаковки продукции различных категорий", category: "Упаковка", images: ["/img/project-6.jpg"] },
+      { id: 7, title: "Мобильные приложения", image: "/img/project-7.jpg", description: "UI/UX дизайн для мобильных приложений", category: "Мобильный дизайн", images: ["/img/project-7.jpg"] },
+      { id: 8, title: "Полиграфия", image: "/img/project-8.jpg", description: "Дизайн буклетов, каталогов и печатной продукции", category: "Полиграфия", images: ["/img/project-8.jpg"] },
+      { id: 9, title: "Социальные сети", image: "/img/project-9.jpg", description: "Оформление страниц в соцсетях, создание постов", category: "SMM", images: ["/img/project-9.jpg"] },
+      { id: 10, title: "Презентации", image: "/img/project-10.jpg", description: "Создание эффектных бизнес-презентаций", category: "Презентации", images: ["/img/project-10.jpg"] },
+      { id: 11, title: "Видеомонтаж", image: "/img/project-11.jpg", description: "Монтаж и обработка видеоматериалов", category: "Видеопродакшен", images: ["/img/project-11.jpg"] },
+      { id: 12, title: "Анимация", image: "/img/project-12.jpg", description: "Создание анимированных элементов и роликов", category: "Анимация", images: ["/img/project-12.jpg"] },
+      { id: 13, title: "Интерьерная графика", image: "/img/project-13.jpg", description: "Оформление интерьеров графическими элементами", category: "Интерьерный дизайн", images: ["/img/project-13.jpg"] },
+      { id: 14, title: "Иллюстрации", image: "/img/project-14.jpg", description: "Создание уникальных иллюстраций для различных целей", category: "Иллюстрация", images: ["/img/project-14.jpg"] },
+      { id: 15, title: "Стикеры и эмодзи", image: "/img/project-15.jpg", description: "Разработка стикерпаков для мессенджеров", category: "Стикеры", images: ["/img/project-15.jpg"] },
+      { id: 16, title: "Реклама в транспорте", image: "/img/project-16.jpg", description: "Дизайн рекламы для общественного транспорта", category: "Транспортная реклама", images: ["/img/project-16.jpg"] },
+      { id: 17, title: "Сувенирная продукция", image: "/img/project-17.jpg", description: "Дизайн корпоративных сувениров и подарков", category: "Сувениры", images: ["/img/project-17.jpg"] },
+      { id: 18, title: "Текстильный дизайн", image: "/img/project-18.jpg", description: "Принты для одежды и текстильных изделий", category: "Текстиль", images: ["/img/project-18.jpg"] },
+      { id: 19, title: "Игровая графика", image: "/img/project-19.jpg", description: "Создание графики для компьютерных игр", category: "Геймдев", images: ["/img/project-19.jpg"] },
+      { id: 20, title: "AR/VR дизайн", image: "/img/project-20.jpg", description: "Дизайн для виртуальной и дополненной реальности", category: "AR/VR", images: ["/img/project-20.jpg"] }
     ];
   });
 
   const [editingProject, setEditingProject] = useState(null);
   const [newLink, setNewLink] = useState({ name: '', url: '', icon: 'Link' });
+  const [newProject, setNewProject] = useState({
+    title: '',
+    image: '',
+    description: '',
+    category: '',
+    images: []
+  });
+  const [showNewProject, setShowNewProject] = useState(false);
 
   const saveProjects = (updatedProjects) => {
     setProjects(updatedProjects);
@@ -175,6 +180,26 @@ const AdminInterface = () => {
         links: [...contactsData.links, { ...newLink }]
       });
       setNewLink({ name: '', url: '', icon: 'Link' });
+    }
+  };
+
+  const createProject = () => {
+    if (newProject.title && newProject.image && newProject.description && newProject.category) {
+      const nextId = Math.max(...projects.map(p => p.id), 0) + 1;
+      const projectToAdd = {
+        ...newProject,
+        id: nextId,
+        images: newProject.image ? [newProject.image] : []
+      };
+      
+      const updated = [...projects, projectToAdd];
+      saveProjects(updated);
+      
+      setNewProject({ title: '', image: '', description: '', category: '', images: [] });
+      setShowNewProject(false);
+      alert('Проект создан!');
+    } else {
+      alert('Заполните все поля!');
     }
   };
 
@@ -275,7 +300,64 @@ const AdminInterface = () => {
         {activeTab === 'projects' && (
           <div className="space-y-6">
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-bold mb-6">Управление проектами</h2>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold">Управление проектами</h2>
+                <button
+                  onClick={() => setShowNewProject(true)}
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+                >
+                  + Добавить проект
+                </button>
+              </div>
+
+              {showNewProject && (
+                <div className="mb-6 p-4 border-2 border-dashed border-green-300 rounded-lg bg-green-50">
+                  <h3 className="font-bold mb-4">Создание нового проекта</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Название проекта"
+                      value={newProject.title}
+                      onChange={(e) => setNewProject({...newProject, title: e.target.value})}
+                      className="p-2 border rounded"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Категория"
+                      value={newProject.category}
+                      onChange={(e) => setNewProject({...newProject, category: e.target.value})}
+                      className="p-2 border rounded"
+                    />
+                    <input
+                      type="url"
+                      placeholder="Ссылка на обложку"
+                      value={newProject.image}
+                      onChange={(e) => setNewProject({...newProject, image: e.target.value})}
+                      className="p-2 border rounded md:col-span-2"
+                    />
+                    <textarea
+                      placeholder="Описание проекта"
+                      value={newProject.description}
+                      onChange={(e) => setNewProject({...newProject, description: e.target.value})}
+                      className="p-2 border rounded md:col-span-2 h-20"
+                    />
+                  </div>
+                  <div className="flex space-x-3 mt-4">
+                    <button
+                      onClick={createProject}
+                      className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                    >
+                      Создать
+                    </button>
+                    <button
+                      onClick={() => setShowNewProject(false)}
+                      className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
+                    >
+                      Отмена
+                    </button>
+                  </div>
+                </div>
+              )}
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {projects.map(project => (
@@ -399,6 +481,17 @@ const AdminInterface = () => {
                   value={contactsData.formTitle}
                   onChange={(e) => setContactsData({...contactsData, formTitle: e.target.value})}
                   className="w-full p-3 border rounded-lg"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email для контактов</label>
+                <input
+                  type="email"
+                  value={contactsData.email}
+                  onChange={(e) => setContactsData({...contactsData, email: e.target.value})}
+                  className="w-full p-3 border rounded-lg"
+                  placeholder="info@flexitype.com"
                 />
               </div>
               
