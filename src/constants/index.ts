@@ -140,7 +140,7 @@ export const CATEGORIES = [
 ];
 
 export const LOGO_URL =
-  "https://cdn.poehali.dev/files/fbc04803-d3cf-4124-a182-7cc156b9ca86.png";
+  "/img/c766c55a-957d-4187-b303-36174f0aed2b.jpg";
 
 export const NAVIGATION_ITEMS = [
   { label: "Главная", href: "hero" },

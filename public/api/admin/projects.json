@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Инфографика для маркетплейсов",
+    "image": "https://ltdfoto.ru/images/2025/07/13/image-412.png",
+    "description": "Создание привлекательной инфографики для товаров на маркетплейсах",
+    "category": "Графический дизайн",
+    "images": ["https://ltdfoto.ru/images/2025/07/13/image-412.png"]
+  },
+  {
+    "id": 2,
+    "title": "Билборды / Витрины / Стенды",
+    "image": "https://ltdfoto.ru/images/2025/07/13/image-413.png",
+    "description": "Дизайн наружной рекламы: билборды, витрины и рекламные стенды",
+    "category": "Наружная реклама",
+    "images": ["https://ltdfoto.ru/images/2025/07/13/image-413.png"]
+  },
+  {
+    "id": 3,
+    "title": "HTML-письма",
+    "image": "https://ltdfoto.ru/images/2025/07/13/image-414.png",
+    "description": "Создание адаптивных HTML-шаблонов для email-рассылок",
+    "category": "Email-маркетинг",
+    "images": ["https://ltdfoto.ru/images/2025/07/13/image-414.png"]
+  },
+  {
+    "id": 4,
+    "title": "Фирменный стиль",
+    "image": "/img/project-4.jpg",
+    "description": "Разработка логотипа и корпоративного стиля для компаний",
+    "category": "Брендинг",
+    "images": ["/img/project-4.jpg"]
+  },
+  {
+    "id": 5,
+    "title": "Веб-дизайн",
+    "image": "/img/project-5.jpg",
+    "description": "Создание современных адаптивных веб-сайтов",
+    "category": "Веб-дизайн",
+    "images": ["/img/project-5.jpg"]
+  },
+  {
+    "id": 6,
+    "title": "Упаковка товаров",
+    "image": "/img/project-6.jpg",
+    "description": "Дизайн упаковки продукции различных категорий",
+    "category": "Упаковка",
+    "images": ["/img/project-6.jpg"]
+  },
+  {
+    "id": 7,
+    "title": "Мобильные приложения",
+    "image": "/img/project-7.jpg",
+    "description": "UI/UX дизайн для мобильных приложений",
+    "category": "Мобильный дизайн",
+    "images": ["/img/project-7.jpg"]
+  },
+  {
+    "id": 8,
+    "title": "Полиграфия",
+    "image": "/img/project-8.jpg",
+    "description": "Дизайн буклетов, каталогов и печатной продукции",
+    "category": "Полиграфия",
+    "images": ["/img/project-8.jpg"]
+  },
+  {
+    "id": 9,
+    "title": "Социальные сети",
+    "image": "/img/project-9.jpg",
+    "description": "Оформление страниц в соцсетях, создание постов",
+    "category": "SMM",
+    "images": ["/img/project-9.jpg"]
+  },
+  {
+    "id": 10,
+    "title": "Презентации",
+    "image": "/img/project-10.jpg",
+    "description": "Создание эффектных бизнес-презентаций",
+    "category": "Презентации",
+    "images": ["/img/project-10.jpg"]
+  }
+]

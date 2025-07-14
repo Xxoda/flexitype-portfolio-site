@@ -1,0 +1,12 @@
+{
+  "title": "Контакты",
+  "formTitle": "Напишите нам",
+  "socialTitle": "Соцсети",
+  "email": "info@flexitype.com",
+  "links": [
+    { "name": "Telegram", "url": "https://t.me/flexitype", "icon": "MessageCircle" },
+    { "name": "VKontakte", "url": "https://vk.com/flexitype", "icon": "Users" },
+    { "name": "WhatsApp", "url": "https://wa.me/your-number", "icon": "Phone" },
+    { "name": "E-mail", "url": "mailto:info@flexitype.com", "icon": "Mail" }
+  ]
+}
